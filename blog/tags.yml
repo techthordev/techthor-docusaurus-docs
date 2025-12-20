@@ -1,0 +1,54 @@
+springboot:
+  label: Spring Boot
+  permalink: /blog/tags/spring-boot
+  description: Guides and insights on the Spring Boot Framework.
+
+cloudrun:
+  label: Cloud Run
+  permalink: /blog/tags/cloud-run
+  description: Serverless deployment and optimization strategies on Google Cloud Run.
+
+serverless:
+  label: Serverless
+  permalink: /blog/tags/serverless
+  description: Deep dives into Serverless architectures and cost-effective cloud solutions.
+
+gcp:
+  label: Google Cloud Platform (GCP)
+  permalink: /blog/tags/gcp
+  description: Articles covering various Google Cloud services and best practices.
+
+angular:
+  label: Angular
+  permalink: /blog/tags/angular
+  description: Tutorials and guides for modern Angular and TypeScript development.
+
+githubactions:
+  label: GitHub Actions
+  permalink: /blog/tags/github-actions
+  description: Automation of CI/CD pipelines, testing, and deployment using GitHub Actions.
+
+selftaught:
+  label: Self-Taught Developer
+  permalink: /blog/tags/self-taught
+  description: Insights, resources, and advice for the self-taught developer journey.
+
+techjourney:
+  label: Tech Journey
+  permalink: /blog/tags/tech-journey
+  description: Reflections and milestones from the continuous learning path in technology.
+
+java:
+  label: Java
+  permalink: /blog/tags/java
+  description: Deep dives and articles focused on Java and JVM technologies.
+
+docker:
+  label: Docker & Containers
+  permalink: /blog/tags/docker
+  description: Containerization and Dockerfile optimization.
+
+devops:
+  label: DevOps & CI/CD
+  permalink: /blog/tags/devops
+  description: Automation, pipelines, and infrastructure as code topics.

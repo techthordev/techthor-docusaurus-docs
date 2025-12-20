@@ -37,7 +37,12 @@ const config: Config = {
           routeBasePath: '/', // docs direkt auf /
           editUrl: 'https://github.com/techthordev/techthor-docusaurus-docs/tree/main/',
         },
-        blog: false, // erstmal AUS – Fokus Docs
+        blog: { // 💡 ACTIVATED AND CONFIGURED
+            showReadingTime: true,
+            routeBasePath: '/blog', // Blog will be at /blog
+            blogTitle: 'TechThorDev Insights & Deep Dives',
+            blogDescription: 'Technical write-ups, case studies, and engineering thoughts.',
+        },
         theme: {
           customCss: './src/css/tailwind.css',
         },
@@ -57,7 +62,7 @@ const config: Config = {
       title: 'TechThorDev',
       logo: {
         alt: 'TechThorDev Logo',
-        src: 'img/logo.png',
+        src: 'img/thors-hammer-logo.jpg',
       },
       items: [
         {
@@ -65,6 +70,11 @@ const config: Config = {
           sidebarId: 'tutorialSidebar',
           label: 'Docs',
           position: 'left',
+        },
+        {
+          to: '/blog', 
+          label: 'Blog', 
+          position: 'left'
         },
         {
           href: 'https://github.com/techthordev',
@@ -95,7 +105,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© ${new Date().getFullYear()} Thorsten Fey - TechThorDev. All rights reserved.`,
+      copyright: `© ${new Date().getFullYear()} Thorsten Fey - TechThorDev - All rights reserved.`,
     },
 
     prism: {
