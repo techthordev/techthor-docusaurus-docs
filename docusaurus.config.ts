@@ -1,50 +1,54 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
-// This file runs in Node.js – no browser APIs here
+function brokenLinkHandler(defaultAction: "ignore" | "log" | "warn" | "error", links: string[]): "ignore" | "log" | "warn" | "error" {
+  const ignoredLinks = ["/api/portal/", "/api/leetcode/"];
+  if (links.some(link => ignoredLinks.includes(link))) {
+    return "warn";
+  }
+  return defaultAction;
+}
 
 const config: Config = {
-  title: 'TechThor Developer Hub',
-  tagline: 'Developer notes, guides and experiments',
-  favicon: 'img/favicon.ico',
+  title: "TechThor Developer Hub",
+  tagline: "Developer notes, guides and experiments",
+  favicon: "img/favicon.ico",
 
-  url: 'https://docs.techthordev.com.br',
-  baseUrl: '/',
+  url: "https://docs.techthordev.com.br",
+  baseUrl: "/",
 
-  organizationName: 'techthordev',
-  projectName: 'techthor-docusaurus-docs',
+  organizationName: "techthordev",
+  projectName: "techthor-docusaurus-docs",
 
-  onBrokenLinks: 'throw',
-  
-  markdown: {
-    hooks: {
-      onBrokenMarkdownLinks: 'warn',
-    },
-  },
+  onBrokenLinks: "warn",
+    onBrokenMarkdownLinks: "warn",
 
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       {
         docs: {
-          sidebarPath: './sidebars.ts',
-          routeBasePath: '/', // docs direkt auf /
-          editUrl: 'https://github.com/techthordev/techthor-docusaurus-docs/tree/main/',
+          sidebarPath: "./sidebars.ts",
+          routeBasePath: "/", // docs direkt auf /
+          editUrl:
+            "https://github.com/techthordev/techthor-docusaurus-docs/tree/main/",
         },
-        blog: { // 💡 ACTIVATED AND CONFIGURED
-            showReadingTime: true,
-            routeBasePath: '/blog', // Blog will be at /blog
-            blogTitle: 'TechThorDev Insights & Deep Dives',
-            blogDescription: 'Technical write-ups, case studies, and engineering thoughts.',
+        blog: {
+          // 💡 ACTIVATED AND CONFIGURED
+          showReadingTime: true,
+          routeBasePath: "/blog", // Blog will be at /blog
+          blogTitle: "TechThorDev Insights & Deep Dives",
+          blogDescription:
+            "Technical write-ups, case studies, and engineering thoughts.",
         },
         theme: {
-          customCss: './src/css/tailwind.css',
+          customCss: "./src/css/tailwind.css",
         },
       } satisfies Preset.Options,
     ],
@@ -54,53 +58,68 @@ const config: Config = {
     // image: 'img/social-card.png',
 
     colorMode: {
-      defaultMode: 'dark',
+      defaultMode: "dark",
       respectPrefersColorScheme: true,
     },
 
     navbar: {
-      title: 'TechThorDev',
+      title: "TechThorDev",
       logo: {
-        alt: 'TechThorDev Logo',
-        src: 'img/thors-hammer-logo.jpg',
+        alt: "TechThorDev Logo",
+        src: "img/thors-hammer-logo.jpg",
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          label: 'Docs',
-          position: 'left',
+          type: "docSidebar",
+          sidebarId: "tutorialSidebar",
+          label: "Docs",
+          position: "left",
         },
         {
-          to: '/blog', 
-          label: 'Blog', 
-          position: 'left'
+          to: "/blog",
+          label: "Blog",
+          position: "left",
         },
         {
-          href: 'https://github.com/techthordev',
-          label: 'GitHub',
-          position: 'right',
+          label: "APIs",
+          position: "left",
+          type: "dropdown",
+          items: [
+            {
+              label: "Portal API Reference",
+              href: "/api/portal/",
+            },
+            {
+              label: "LeetCode API Docs",
+              href: "/api/leetcode/",
+            },
+          ],
+        },
+        {
+          href: "https://github.com/techthordev",
+          label: "GitHub",
+          position: "right",
         },
       ],
     },
 
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: 'Docs',
-          items: [{label: 'Getting Started', to: '/intro'}],
+          title: "Docs",
+          items: [{ label: "Getting Started", to: "/intro" }],
         },
         {
-          title: 'More',
+          title: "More",
           items: [
             {
-              label: 'Project - LeetCode',
-              href: 'https://leetcode.techthordev.com.br',
+              label: "Project - LeetCode",
+              href: "https://leetcode.techthordev.com.br",
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/techthordev',
+              label: "GitHub",
+              href: "https://github.com/techthordev",
             },
           ],
         },

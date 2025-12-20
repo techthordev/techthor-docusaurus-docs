@@ -26,6 +26,25 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
+    
+    // API's for the portal and leetcode
+    {
+      type: "category",
+      label: "APIs",
+      collapsed: true,
+      items: [
+        {
+          type: "link",
+          label: "Portal API Reference",
+          href: "/api/portal/",
+        },
+        {
+          type: "link",
+          label: "LeetCode API Reference",
+          href: "/api/leetcode/",
+        }
+      ],
+    },
 
     // 2. Core Guides
     {

@@ -2,12 +2,16 @@
   "hosting": {
     "target": "docs-techthordev-app",
     "public": "build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
+      {
+        "source": "/api/portal/**",
+        "destination": "https://compodoc-portal-api.web.app/api/portal"
+      },
+      {
+        "source": "/api/leetcode/**",
+        "destination": "https://compodoc-leetcode-api.web.app/api/leetcode"
+      },
       {
         "source": "**",
         "destination": "/index.html"
