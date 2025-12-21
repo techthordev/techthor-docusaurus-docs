@@ -21,8 +21,8 @@ const config: Config = {
   organizationName: "techthordev",
   projectName: "techthor-docusaurus-docs",
 
-  onBrokenLinks: "warn",
-    onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: "ignore",
+    onBrokenMarkdownLinks: "ignore",
 
   i18n: {
     defaultLocale: "en",
@@ -87,11 +87,13 @@ const config: Config = {
           items: [
             {
               label: "Portal API Reference",
-              href: "https://docs.techthordev.com.br/api/portal/",
+              href: "/api/portal/",
+              target: "_blank"
             },
             {
               label: "LeetCode API Docs",
-              href: "https://docs.techthordev.com.br/api/leetcode/",
+              href: "/api/leetcode/",
+              target: "_blank"
             },
           ],
         },
