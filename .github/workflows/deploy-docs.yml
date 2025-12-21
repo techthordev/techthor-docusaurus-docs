@@ -75,7 +75,7 @@ jobs:
             https://api.github.com/repos/${{ env.OWNER }}/${{ env.PORTAL_REPO }}/actions/artifacts/${{ steps.portal_artifact.outputs.artifact_id }}/zip \
             -o tmp/artifacts/portal/artifact.zip
           mkdir -p build/portal-api
-          unzip -o tmp/artifacts/portal/artifact.zip -d build/portal-api
+          unzip -o tmp/artifacts/portal/artifact.zip -d build/portal
 
       # ---------- LeetCode: get last successful artifact ----------
       - name: Get latest successful workflow run (LeetCode)
@@ -124,7 +124,7 @@ jobs:
             https://api.github.com/repos/${{ env.OWNER }}/${{ env.LEETCODE_REPO }}/actions/artifacts/${{ steps.leetcode_artifact.outputs.artifact_id }}/zip \
             -o tmp/artifacts/leetcode/artifact.zip
           mkdir -p build/leetcode-api
-          unzip -o tmp/artifacts/leetcode/artifact.zip -d build/leetcode-api
+          unzip -o tmp/artifacts/leetcode/artifact.zip -d build/leetcode
 
       # ---------- Build ----------
       - name: Build Docusaurus
