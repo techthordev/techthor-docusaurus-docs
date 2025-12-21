@@ -100,7 +100,7 @@ jobs:
         id: leetcode_artifact
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { OWNER, LEETCODE_REPO, LEETCODE_ARTIFACT_NAME } = process.env;
             const run_id = core.getInput('run_id', { required: false }) || '${{ steps.leetcode_run.outputs.run_id }}';
