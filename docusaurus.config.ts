@@ -21,8 +21,8 @@ const config: Config = {
   organizationName: "techthordev",
   projectName: "techthor-docusaurus-docs",
 
-  onBrokenLinks: "ignore",
-    onBrokenMarkdownLinks: "ignore",
+  onBrokenLinks: brokenLinkHandler as any,
+    onBrokenMarkdownLinks: "warn",
 
   i18n: {
     defaultLocale: "en",
