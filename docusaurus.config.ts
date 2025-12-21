@@ -35,14 +35,14 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          routeBasePath: "/", // docs direkt auf /
+          routeBasePath: "/",
           editUrl:
             "https://github.com/techthordev/techthor-docusaurus-docs/tree/main/",
         },
         blog: {
           // 💡 ACTIVATED AND CONFIGURED
           showReadingTime: true,
-          routeBasePath: "/blog", // Blog will be at /blog
+          routeBasePath: "/blog", 
           blogTitle: "TechThorDev Insights & Deep Dives",
           blogDescription:
             "Technical write-ups, case studies, and engineering thoughts.",
