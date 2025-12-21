@@ -3,19 +3,15 @@
     "target": "docs-techthordev-app",
     "public": "build",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "redirects": [
+    "rewrites": [
       {
         "source": "/api/portal/**",
-        "destination": "https://compodoc-portal-api.web.app",
-        "type": 302
+        "destination": "/portal-api/index.html"
       },
       {
         "source": "/api/leetcode/**",
-        "destination": "https://compodoc-leetcode-api.web.app",
-        "type": 302
-      }
-    ],
-    "rewrites": [
+        "destination": "/leetcode-api/index.html"
+      },
       {
         "source": "**",
         "destination": "/index.html"
