@@ -2,7 +2,7 @@ name: Deploy Docs Portal
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -11,8 +11,8 @@ jobs:
 
     env:
       OWNER: techthordev
-      PORTAL_REPO: compodoc-portal-api
-      LEETCODE_REPO: compodoc-leetcode-api
+      PORTAL_REPO: techthor-polyglot-portal
+      LEETCODE_REPO: leetcode
       PORTAL_ARTIFACT_NAME: compodoc-portal-api
       LEETCODE_ARTIFACT_NAME: compodoc-leetcode-api
 
@@ -133,8 +133,6 @@ jobs:
       # ---------- Deploy ----------
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
-        
+
       - name: Deploy to Firebase Hosting
         run: firebase deploy --only hosting:docs-techthordev-app --token ${{ secrets.FIREBASE_TOKEN }}
-        
-
