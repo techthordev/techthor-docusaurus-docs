@@ -13,7 +13,9 @@
         "source": "/api/leetcode/**",
         "destination": "https://compodoc-leetcode-api.web.app",
         "type": 302
-      },
+      }
+    ],
+    "rewrites": [
       {
         "source": "**",
         "destination": "/index.html"
