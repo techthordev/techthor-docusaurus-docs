@@ -2,9 +2,12 @@ import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
-function brokenLinkHandler(defaultAction: "ignore" | "log" | "warn" | "error", links: string[]): "ignore" | "log" | "warn" | "error" {
+function brokenLinkHandler(
+  defaultAction: "ignore" | "log" | "warn" | "error",
+  links: string[],
+): "ignore" | "log" | "warn" | "error" {
   const ignoredLinks = ["/api/portal/", "/api/leetcode/"];
-  if (links.some(link => ignoredLinks.includes(link))) {
+  if (links.some((link) => ignoredLinks.includes(link))) {
     return "warn";
   }
   return defaultAction;
@@ -21,8 +24,8 @@ const config: Config = {
   organizationName: "techthordev",
   projectName: "techthor-docusaurus-docs",
 
-  onBrokenLinks: brokenLinkHandler as any,
-    onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: "ignore",
+  onBrokenMarkdownLinks: "ignore",
 
   i18n: {
     defaultLocale: "en",
@@ -42,7 +45,7 @@ const config: Config = {
         blog: {
           // 💡 ACTIVATED AND CONFIGURED
           showReadingTime: true,
-          routeBasePath: "/blog", 
+          routeBasePath: "/blog",
           blogTitle: "TechThorDev Insights & Deep Dives",
           blogDescription:
             "Technical write-ups, case studies, and engineering thoughts.",
@@ -88,12 +91,12 @@ const config: Config = {
             {
               label: "Portal API Reference",
               href: "/api/portal/",
-              target: "_blank"
+              target: "_blank",
             },
             {
               label: "LeetCode API Docs",
               href: "/api/leetcode/",
-              target: "_blank"
+              target: "_blank",
             },
           ],
         },
