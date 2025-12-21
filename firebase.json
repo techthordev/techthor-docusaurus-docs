@@ -5,11 +5,11 @@
     "rewrites": [
       {
         "source": "/api/portal/**",
-        "destination": "https://compodoc-portal-api.web.app"
+        "destination": "https://compodoc-portal-api.web.app/$1"
       },
       {
         "source": "/api/leetcode/**",
-        "destination": "https://compodoc-leetcode-api.web.app"
+        "destination": "https://compodoc-leetcode-api.web.app/$1"
       },
       {
         "source": "**",
