@@ -2,15 +2,19 @@
   "hosting": {
     "site": "docs-techthordev-app",
     "public": "build",
-    "rewrites": [
+    "redirects": [
       {
         "source": "/api/portal/**",
-        "destination": "https://compodoc-portal-api.web.app"
+        "destination": "https://compodoc-portal-api.web.app",
+        "type": 302
       },
       {
         "source": "/api/leetcode/**",
-        "destination": "https://compodoc-leetcode-api.web.app"
-      },
+        "destination": "https://compodoc-leetcode-api.web.app",
+        "type": 302
+      }
+    ],
+    "rewrites": [
       {
         "source": "**",
         "destination": "/index.html"
