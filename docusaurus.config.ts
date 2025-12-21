@@ -87,11 +87,11 @@ const config: Config = {
           items: [
             {
               label: "Portal API Reference",
-              href: "/api/portal/",
+              href: "https://docs.techthordev.com.br/api/portal/",
             },
             {
               label: "LeetCode API Docs",
-              href: "/api/leetcode/",
+              href: "https://docs.techthordev.com.br/api/leetcode/",
             },
           ],
         },
