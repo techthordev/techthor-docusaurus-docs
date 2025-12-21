@@ -6,11 +6,11 @@
     "rewrites": [
       {
         "source": "/api/portal/**",
-        "destination": "/portal-api/index.html"
+        "destination": "/portal/index.html"
       },
       {
         "source": "/api/leetcode/**",
-        "destination": "/leetcode-api/index.html"
+        "destination": "/leetcode/index.html"
       },
       {
         "source": "**",
