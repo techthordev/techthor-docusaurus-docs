@@ -33,7 +33,7 @@ jobs:
         id: portal_run
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { OWNER, PORTAL_REPO } = process.env;
             const runs = await github.rest.actions.listWorkflowRunsForRepo({
@@ -51,7 +51,7 @@ jobs:
         id: portal_artifact
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { OWNER, PORTAL_REPO, PORTAL_ARTIFACT_NAME } = process.env;
             const run_id = core.getInput('run_id', { required: false }) || '${{ steps.portal_run.outputs.run_id }}';
@@ -70,7 +70,7 @@ jobs:
         run: |
           mkdir -p tmp/artifacts/portal
           curl -L \
-            -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/${{ env.OWNER }}/${{ env.PORTAL_REPO }}/actions/artifacts/${{ steps.portal_artifact.outputs.artifact_id }}/zip \
             -o tmp/artifacts/portal/artifact.zip
@@ -82,7 +82,7 @@ jobs:
         id: leetcode_run
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { OWNER, LEETCODE_REPO } = process.env;
             const runs = await github.rest.actions.listWorkflowRunsForRepo({
@@ -119,7 +119,7 @@ jobs:
         run: |
           mkdir -p tmp/artifacts/leetcode
           curl -L \
-            -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/${{ env.OWNER }}/${{ env.LEETCODE_REPO }}/actions/artifacts/${{ steps.leetcode_artifact.outputs.artifact_id }}/zip \
             -o tmp/artifacts/leetcode/artifact.zip
