@@ -36,12 +36,14 @@ const sidebars: SidebarsConfig = {
         {
           type: "link",
           label: "Portal API Reference",
-          href: "/api/portal/",
+          href: "https://docs.techthordev.com.br/api/portal/",
+
         },
         {
           type: "link",
           label: "LeetCode API Reference",
-          href: "/api/leetcode/",
+          href: "https://docs.techthordev.com.br/api/leetcode/",
+
         }
       ],
     },
