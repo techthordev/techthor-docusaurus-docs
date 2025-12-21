@@ -8,14 +8,6 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-
-    env:
-      OWNER: techthordev
-      PORTAL_REPO: techthor-polyglot-portal
-      LEETCODE_REPO: leetcode
-      PORTAL_ARTIFACT_NAME: compodoc-portal-api
-      LEETCODE_ARTIFACT_NAME: compodoc-leetcode-api
-
     steps:
       - name: Checkout Docusaurus Repo
         uses: actions/checkout@v4
@@ -28,109 +20,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # ---------- Portal: get last successful artifact ----------
-      - name: Get latest successful workflow run (Portal)
-        id: portal_run
-        uses: actions/github-script@v7
+      # Portal Artefakt holen und entpacken
+      - name: Download Portal Artifact
+        uses: actions/download-artifact@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { OWNER, PORTAL_REPO } = process.env;
-            const runs = await github.rest.actions.listWorkflowRunsForRepo({
-              owner: OWNER,
-              repo: PORTAL_REPO,
-              status: 'success',
-              per_page: 1
-            });
-            if (!runs.data.workflow_runs.length) {
-              core.setFailed('No successful workflow runs found for Portal repo');
-            }
-            core.setOutput('run_id', runs.data.workflow_runs[0].id);
+          name: compodoc-portal-api
+          path: build/portal
 
-      - name: Find artifact by name (Portal)
-        id: portal_artifact
-        uses: actions/github-script@v7
+      # LeetCode Artefakt holen und entpacken
+      - name: Download LeetCode Artifact
+        uses: actions/download-artifact@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { OWNER, PORTAL_REPO, PORTAL_ARTIFACT_NAME } = process.env;
-            const run_id = core.getInput('run_id', { required: false }) || '${{ steps.portal_run.outputs.run_id }}';
-            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-              owner: OWNER,
-              repo: PORTAL_REPO,
-              run_id
-            });
-            const artifact = artifacts.data.artifacts.find(a => a.name === PORTAL_ARTIFACT_NAME);
-            if (!artifact) {
-              core.setFailed(`Artifact "${PORTAL_ARTIFACT_NAME}" not found in Portal repo run ${run_id}`);
-            }
-            core.setOutput('artifact_id', artifact.id);
+          name: compodoc-leetcode-api
+          path: build/leetcode
 
-      - name: Download artifact (Portal)
-        run: |
-          mkdir -p tmp/artifacts/portal
-          curl -L \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ env.OWNER }}/${{ env.PORTAL_REPO }}/actions/artifacts/${{ steps.portal_artifact.outputs.artifact_id }}/zip \
-            -o tmp/artifacts/portal/artifact.zip
-          mkdir -p build/portal-api
-          unzip -o tmp/artifacts/portal/artifact.zip -d build/portal
-
-      # ---------- LeetCode: get last successful artifact ----------
-      - name: Get latest successful workflow run (LeetCode)
-        id: leetcode_run
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { OWNER, LEETCODE_REPO } = process.env;
-            const runs = await github.rest.actions.listWorkflowRunsForRepo({
-              owner: OWNER,
-              repo: LEETCODE_REPO,
-              status: 'success',
-              per_page: 1
-            });
-            if (!runs.data.workflow_runs.length) {
-              core.setFailed('No successful workflow runs found for LeetCode repo');
-            }
-            core.setOutput('run_id', runs.data.workflow_runs[0].id);
-
-      - name: Find artifact by name (LeetCode)
-        id: leetcode_artifact
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { OWNER, LEETCODE_REPO, LEETCODE_ARTIFACT_NAME } = process.env;
-            const run_id = core.getInput('run_id', { required: false }) || '${{ steps.leetcode_run.outputs.run_id }}';
-            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-              owner: OWNER,
-              repo: LEETCODE_REPO,
-              run_id
-            });
-            const artifact = artifacts.data.artifacts.find(a => a.name === LEETCODE_ARTIFACT_NAME);
-            if (!artifact) {
-              core.setFailed(`Artifact "${LEETCODE_ARTIFACT_NAME}" not found in LeetCode repo run ${run_id}`);
-            }
-            core.setOutput('artifact_id', artifact.id);
-
-      - name: Download artifact (LeetCode)
-        run: |
-          mkdir -p tmp/artifacts/leetcode
-          curl -L \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ env.OWNER }}/${{ env.LEETCODE_REPO }}/actions/artifacts/${{ steps.leetcode_artifact.outputs.artifact_id }}/zip \
-            -o tmp/artifacts/leetcode/artifact.zip
-          mkdir -p build/leetcode-api
-          unzip -o tmp/artifacts/leetcode/artifact.zip -d build/leetcode
-
-      # ---------- Build ----------
       - name: Build Docusaurus
         run: npm run build
 
-      # ---------- Deploy ----------
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
