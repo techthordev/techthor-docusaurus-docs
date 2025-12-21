@@ -5,7 +5,10 @@
     "rewrites": [
       {
         "source": "/api/**",
-        "destination": "https://docs-nginx-proxy-761863009146.us-central1.run.app"
+        "run": {
+          "serviceId": "docs-nginx-proxy",
+          "region": "us-central1"
+        }
       },
       {
         "source": "**",
