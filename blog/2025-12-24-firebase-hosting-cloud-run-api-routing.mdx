@@ -1,0 +1,59 @@
+---
+slug: firebase-hosting-cloud-run-api-routing
+title: "Clean API Routing with Firebase Hosting and Cloud Run"
+authors: [thorstenfey]
+tags: [cloudrun, serverless, gcp, devops, docker]
+date: 2025-12-24
+---
+
+This post documents a production-ready routing pattern for Firebase Hosting
+that avoids redirects, preserves clean URLs, and keeps API tooling intact.
+
+It originated from a LinkedIn discussion after repeatedly seeing `/api/**`
+traffic handled via 302 redirects — a workaround that breaks DX,
+auth flows, and OpenAPI tooling at scale.
+
+The setup uses Firebase Hosting strictly as a router
+and delegates API traffic to a minimal Nginx proxy running on Cloud Run.
+
+```
+graph TB
+    A[Browser] -->|Request| B[Firebase Hosting]
+    B -->|/docs| C[Static Content - Docusaurus]
+    B -->|/api/**| D[Cloud Run - Nginx Proxy]
+    D -->|upstream| E["/api/portal"]
+    D -->|upstream| F["/api/leetcode"]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff4e6
+    style C fill:#e8f5e9
+    style D fill:#fce4ec
+    style E fill:#f3e5f5
+    style F fill:#f3e5f5
+```
+
+![Firebase Hosting → Cloud Run API routing diagram](/img/blog/firebase-cloud-run-routing.png)
+
+### Why this pattern
+
+Firebase Hosting cannot proxy arbitrary external URLs
+while keeping the same origin.
+
+Redirects solve this superficially,
+but introduce new problems:
+
+- broken API tooling
+- leaking infrastructure details
+- SPA router interference
+- brittle frontend workarounds
+
+This pattern solves routing at the infrastructure layer instead.
+
+---
+
+### Discussion
+
+This pattern sparked a broader discussion on LinkedIn
+around API routing in serverless setups.
+
+👉 [Join the discussion on LinkedIn](https://www.linkedin.com/…)
